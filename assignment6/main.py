@@ -105,7 +105,7 @@ def exercise16():
 
 def exercise17():
     str1 = "assignment6 % python3 main.py"
-    print(f'Number of occurences of "a" character == {str1.count('a')}')
+    print(f'Number of occurences of "a" character == {str1.count("a")}')
 
 
 def exercise18():
