@@ -313,7 +313,7 @@ def remove_elements(my_list: list, element):
 """
 Exercise-16: Higher-Order Function for Repeats
 Write a function "repeat(n: int)" that returns a function. 
-The returned function should take a string input and repeat it `n` times.
+x≈The returned function should take a string input and repeat it `n` times.
 
 Example:
 repeat_three_times = repeat(3)
