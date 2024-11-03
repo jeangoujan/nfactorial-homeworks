@@ -56,7 +56,7 @@ my_zip([1, 2, 3], [4, 5, 6]) -> [(1, 4), (2, 5), (3, 6)]
 
 
 def my_zip(*iterables):
-
+    return list(map(lambda *args: tuple(args) , *iterables))
 
 
 """
@@ -73,7 +73,25 @@ def expensive_function(x, y):
 """
 
 
+
 def caching_decorator(func):
+    cache_dict = dict()
+    def wrapper(*args, **kwargs):
+        key = (args, tuple(sorted(kwargs.items())))
+        print(key)
+        if key in cache_dict:
+            return cache_dict[key]
+        result = func(*args, **kwargs)
+        cache_dict[key] = result
+        return result
+    return wrapper
+
+@caching_decorator
+def expensive_function(x, y):
+    # Simulate an expensive function by sleeping
+    import time
+    time.sleep(5)
+    return x + y
 
 
 
@@ -87,12 +105,18 @@ recursive_flatten([1, [2, [3, 4], 5]]) -> [1, 2, 3, 4, 5]
 
 
 def recursive_flatten(input_list: list) -> list:
-    pass
-
+    result_list = list()
+    for i in input_list:
+        if isinstance(i, list):
+            result_list.extend(recursive_flatten(i))
+        else:
+            result_list.append(i)
+    return result_list
 
 """
 💎 Exercise-6: Decorator for Checking Function Arguments
-Write a decorator "check_args(*arg_types)" that checks the types of the arguments passed to the function it decorates.
+Write a decorator "check_args(*arg_types)" that checks the 
+types of the arguments passed to the function it decorates.
 
 Example:
 @check_args(int, int)
@@ -102,4 +126,18 @@ def add(a, b):
 
 
 def check_args(*arg_types):
-    pass
+    def decorator(func):
+        def wrapper(*args, **kwargs):
+            for arg, expected_type in zip(args, arg_types):
+                if not isinstance(arg, expected_type):
+                    raise TypeError("Error")
+            return func(*args, **kwargs)
+        return wrapper
+    return decorator
+
+
+@check_args(int, int)
+def add(a, b):
+    return a + b
+
+
