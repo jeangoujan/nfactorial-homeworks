@@ -6,12 +6,29 @@ Example:
 memoized_fibonacci(10) -> 55
 """
 
+memoize_dict = {}
+
+
 def memoized_fibonacci(n: int) -> int:
-    pass
+    if n == 0:
+        return 0
+    elif n == 1:
+        return 1
+    else:
+        if n in memoize_dict:
+            return memoize_dict[n]
+        result = memoized_fibonacci(n - 1) + memoized_fibonacci(n - 2)
+        memoize_dict[n] = result
+        return result
+
+
 
 """
 💎 Exercise-2: Currying Function
-Write a function "curry(func, *args)" that implements currying. The function should return a new function that when called will return the result of applying the input function to the provided arguments, followed by the new arguments.
+Write a function "curry(func, *args)" 
+that implements currying. The function should return a new function 
+that when called will return the result of applying the input function to the provided arguments, 
+followed by the new arguments.
 
 Example:
 def add_three_numbers(a, b, c):
@@ -20,19 +37,27 @@ add_five_and_six = curry(add_three_numbers, 5, 6)
 add_five_and_six(7) -> 18
 """
 
+
 def curry(func, *args):
-    pass
+    def wrapper(*new_args):
+        return func(*args, *new_args)
+
+    return wrapper
+
 
 """
 💎 Exercise-3: Implement zip() using map() and lambda
-Write a function "my_zip(*iterables)" that takes in multiple iterables and returns an iterator that aggregates elements from each of the iterables.
+Write a function "my_zip(*iterables)" that takes in multiple
+iterables and returns an iterator that aggregates elements from each of the iterables.
 
 Example:
 my_zip([1, 2, 3], [4, 5, 6]) -> [(1, 4), (2, 5), (3, 6)]
 """
 
+
 def my_zip(*iterables):
-    pass
+
+
 
 """
 💎 Exercise-4: Caching Decorator
@@ -47,8 +72,10 @@ def expensive_function(x, y):
     return x + y
 """
 
+
 def caching_decorator(func):
-    pass
+
+
 
 """
 💎 Exercise-5: Recursive Flattening
@@ -58,8 +85,10 @@ Example:
 recursive_flatten([1, [2, [3, 4], 5]]) -> [1, 2, 3, 4, 5]
 """
 
+
 def recursive_flatten(input_list: list) -> list:
     pass
+
 
 """
 💎 Exercise-6: Decorator for Checking Function Arguments
@@ -70,6 +99,7 @@ Example:
 def add(a, b):
     return a + b
 """
+
 
 def check_args(*arg_types):
     pass

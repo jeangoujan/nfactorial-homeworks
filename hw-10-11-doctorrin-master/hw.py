@@ -220,7 +220,9 @@ def my_reduce(func, iterable, initializer=None):
 
 """
 Exercise-11: Lambda Function Sort
-Write a function "sort_by_last_letter(words: list) -> list" that sorts a list of words in ascending order based on the last letter of each word. Use a lambda function.
+Write a function "sort_by_last_letter(words: list) 
+-> list" that sorts a list of words in ascending order 
+based on the last letter of each word. Use a lambda function.
 
 Example:
 sort_by_last_letter(['apple', 'banana', 'cherry', 'date']) -> ['banana', 'apple', 'date', 'cherry']
@@ -228,7 +230,13 @@ sort_by_last_letter(['apple', 'banana', 'cherry', 'date']) -> ['banana', 'apple'
 
 
 def sort_by_last_letter(words: list) -> list:
-    pass
+    sorted_words = sorted(words, key=lambda word: word[-1])
+    return sorted_words
+
+
+
+print(sort_by_last_letter(['apple', 'banana', 'cherry', 'date']))
+
 
 
 """
@@ -322,7 +330,10 @@ repeat_three_times('hello') -> 'hellohellohello'
 
 
 def repeat(n: int):
-    pass
+    def wrapper(args):
+        return args * n
+    return wrapper
+
 
 
 """
@@ -335,12 +346,17 @@ recursive_sum([1, 2, 3, 4, 5]) -> 15
 
 
 def recursive_sum(my_list: list) -> int:
-    pass
+    if not my_list:
+        return 0
+    elif len(my_list) == 1:
+        return my_list[0]
+    return my_list[0] + recursive_sum(my_list[1:])
 
 
 """
 Exercise-18: Map with Multiple Lists
-Write a function "add_two_lists(list1: list, list2: list) -> list" that uses `map` and `lambda` to add together corresponding elements of two lists.
+Write a function "add_two_lists(list1: list, list2: list)
+ -> list" that uses `map` and `lambda` to add together corresponding elements of two lists.
 
 Example:
 add_two_lists([1, 2, 3], [4, 5, 6]) -> [5, 7, 9]
@@ -348,4 +364,4 @@ add_two_lists([1, 2, 3], [4, 5, 6]) -> [5, 7, 9]
 
 
 def add_two_lists(list1: list, list2: list) -> list:
-    pass
+    return list(map(lambda x,y: x + y, list1, list2))
